@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Login')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<main class="page">
+    <section class="card">
+        <h1>Iniciar sesión</h1>
+        <p>Usa las credenciales de prueba cargadas en PostgreSQL.</p>
+
+        <div th:if="${param.error}" class="alert alert-error">
+            Usuario o contraseña incorrectos
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input id="username" type="text" name="username" placeholder="Usuario" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input id="password" type="password" name="password" placeholder="Contraseña" required>
+            </div>
+            <button class="btn" type="submit">Entrar</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

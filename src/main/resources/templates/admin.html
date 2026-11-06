@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Panel de administración')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<main class="page">
+    <section class="card">
+        <span class="badge">ADMIN</span>
+        <h1>Panel de administración</h1>
+        <p>Hola, <span sec:authentication="name">usuario</span>. Tienes acceso completo a la tienda.</p>
+        <div class="actions">
+            <a class="btn btn-secondary" th:href="@{/cliente}">Ver panel cliente</a>
+            <a class="btn btn-secondary" th:href="@{/vendedor}">Ver panel vendedor</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>
