@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="~{fragments/layout :: head('Tienda')}"></head>
+<head th:replace="~{fragments/layout :: head('Inicio')}"></head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 <main class="page">
-    <section class="card">
-        <h1>Bienvenido a la Tienda</h1>
-        <p>Aplicación web con Thymeleaf y control de acceso por roles (ADMIN, VENDEDOR, CLIENTE).</p>
+    <section class="card hero">
+        <span class="eyebrow">Spring Boot · Thymeleaf · Security</span>
+        <h1 class="hero-title">Tienda</h1>
+        <p class="lede">
+            Gestión de acceso por roles y catálogo de productos con vistas renderizadas en el servidor.
+        </p>
+        <div class="hero-meta">
+            <span class="chip">ADMIN</span>
+            <span class="chip">VENDEDOR</span>
+            <span class="chip">CLIENTE</span>
+        </div>
         <div class="actions" sec:authorize="isAnonymous()">
             <a class="btn" th:href="@{/login}">Iniciar sesión</a>
         </div>
         <div class="actions" sec:authorize="isAuthenticated()">
             <a class="btn" th:href="@{/redirigir}">Ir a mi panel</a>
+            <a class="btn btn-secondary" th:href="@{/productos}">Ver productos</a>
         </div>
     </section>
 </main>

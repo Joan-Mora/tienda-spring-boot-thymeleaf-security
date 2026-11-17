@@ -8,8 +8,9 @@
     <section class="card">
         <div class="toolbar">
             <div>
+                <span class="eyebrow">Inventario</span>
                 <h1>Catálogo de productos</h1>
-                <p>Consulta, búsqueda y gestión según tu rol.</p>
+                <p class="lede">Consulta, búsqueda y gestión según tu rol.</p>
             </div>
             <a class="btn"
                sec:authorize="hasAnyRole('VENDEDOR','ADMIN')"
@@ -19,7 +20,7 @@
         <p th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}">Mensaje</p>
 
         <form class="search-form" th:action="@{/productos}" method="get">
-            <input type="text" name="nombre" th:value="${nombre}" placeholder="Buscar por nombre">
+            <input type="text" name="nombre" th:value="${nombre}" placeholder="Buscar por nombre…">
             <button class="btn" type="submit">Buscar</button>
             <a class="btn btn-secondary" th:href="@{/productos}">Limpiar</a>
         </form>
@@ -39,23 +40,30 @@
                 <tbody>
                 <tr th:each="p, estado : ${productos}">
                     <td th:text="${estado.count}">1</td>
-                    <td th:text="${p.nombre}">Nombre</td>
-                    <td th:text="${p.categoria}">Categoría</td>
-                    <td th:text="${#numbers.formatDecimal(p.precio, 1, 'POINT', 0, 'COMMA')}">0</td>
-                    <td th:text="${p.stock}" th:classappend="${p.stock < 5} ? 'bajo'">0</td>
+                    <td class="product-name" th:text="${p.nombre}">Nombre</td>
+                    <td>
+                        <span class="badge badge-muted" th:text="${p.categoria}">Categoría</span>
+                    </td>
+                    <td class="price"
+                        th:text="${'$' + #numbers.formatDecimal(p.precio, 1, 'POINT', 0, 'COMMA')}">$0</td>
+                    <td>
+                        <span class="stock-pill"
+                              th:classappend="${p.stock &lt; 5} ? ' is-low'"
+                              th:text="${p.stock}">0</span>
+                    </td>
                     <td class="actions-cell">
-                        <a th:href="@{/productos/{id}(id=${p.id})}">Ver</a>
-                        <span sec:authorize="hasAnyRole('VENDEDOR','ADMIN')">
-                            |
-                            <a th:href="@{/productos/{id}/editar(id=${p.id})}">Editar</a>
-                            |
-                            <form th:action="@{/productos/{id}/eliminar(id=${p.id})}" method="post" class="inline-form">
-                                <button class="link-button danger" type="submit">Eliminar</button>
-                            </form>
-                        </span>
+                        <div class="action-group">
+                            <a class="action-link" th:href="@{/productos/{id}(id=${p.id})}">Ver</a>
+                            <span sec:authorize="hasAnyRole('VENDEDOR','ADMIN')">
+                                <a class="action-link" th:href="@{/productos/{id}/editar(id=${p.id})}">Editar</a>
+                                <form th:action="@{/productos/{id}/eliminar(id=${p.id})}" method="post" class="inline-form">
+                                    <button class="link-button danger" type="submit">Eliminar</button>
+                                </form>
+                            </span>
+                        </div>
                     </td>
                 </tr>
-                <tr th:if="${#lists.isEmpty(productos)}">
+                <tr th:if="${#lists.isEmpty(productos)}" class="empty-row">
                     <td colspan="6">No hay productos para mostrar.</td>
                 </tr>
                 </tbody>

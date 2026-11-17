@@ -6,11 +6,27 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 <main class="page">
     <section class="card">
-        <span class="badge">CLIENTE</span>
-        <h1>Panel del cliente</h1>
-        <p>Hola, <span sec:authentication="name">usuario</span>. Aquí puedes consultar tu espacio de cliente.</p>
-        <div class="meta">
-            <span>Acceso permitido para roles: CLIENTE y ADMIN.</span>
+        <div class="panel-kicker">
+            <span class="badge">Cliente</span>
+            <span class="badge badge-muted">Solo consulta</span>
+        </div>
+        <h1 class="panel-title">Panel del cliente</h1>
+        <p class="lede">
+            Hola, <strong sec:authentication="name">usuario</strong>.
+            Desde aquí puedes explorar el catálogo y consultar el detalle de cada producto.
+        </p>
+        <div class="stat-row">
+            <div class="stat">
+                <span class="stat-label">Rol activo</span>
+                <span class="stat-value">CLIENTE</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Permisos</span>
+                <span class="stat-value">Lectura</span>
+            </div>
+        </div>
+        <div class="actions">
+            <a class="btn" th:href="@{/productos}">Ir al catálogo</a>
         </div>
     </section>
 </main>

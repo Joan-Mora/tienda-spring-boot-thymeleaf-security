@@ -6,11 +6,28 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 <main class="page">
     <section class="card">
-        <span class="badge">VENDEDOR</span>
-        <h1>Panel del vendedor</h1>
-        <p>Hola, <span sec:authentication="name">usuario</span>. Aquí gestionas el espacio de ventas.</p>
-        <div class="meta">
-            <span>Acceso permitido para roles: VENDEDOR y ADMIN.</span>
+        <div class="panel-kicker">
+            <span class="badge">Vendedor</span>
+            <span class="badge badge-muted">Gestión de catálogo</span>
+        </div>
+        <h1 class="panel-title">Panel del vendedor</h1>
+        <p class="lede">
+            Hola, <strong sec:authentication="name">usuario</strong>.
+            Puedes crear, editar y eliminar productos del inventario.
+        </p>
+        <div class="stat-row">
+            <div class="stat">
+                <span class="stat-label">Rol activo</span>
+                <span class="stat-value">VENDEDOR</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Permisos</span>
+                <span class="stat-value">CRUD</span>
+            </div>
+        </div>
+        <div class="actions">
+            <a class="btn" th:href="@{/productos}">Gestionar productos</a>
+            <a class="btn btn-secondary" th:href="@{/productos/nuevo}">Nuevo producto</a>
         </div>
     </section>
 </main>

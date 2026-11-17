@@ -6,15 +6,31 @@
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 <main class="page">
     <section class="card">
-        <span class="badge" th:text="${producto.categoria}">Categoría</span>
+        <div class="panel-kicker">
+            <span class="badge" th:text="${producto.categoria}">Categoría</span>
+            <span class="badge badge-danger" th:if="${producto.stock == 0}">Agotado</span>
+            <span class="badge badge-warn" th:if="${producto.stock &gt; 0 and producto.stock &lt; 5}">Stock bajo</span>
+        </div>
         <h1 th:text="${producto.nombre}">Nombre</h1>
-        <p th:text="${producto.descripcion}">Descripción</p>
+        <p class="lede" th:text="${producto.descripcion}">Descripción</p>
 
-        <ul class="detail-list">
-            <li>Categoría: <span th:text="${producto.categoria}"></span></li>
-            <li>Precio: $<span th:text="${#numbers.formatDecimal(producto.precio, 1, 'POINT', 0, 'COMMA')}"></span></li>
-            <li>Stock: <span th:text="${producto.stock}" th:classappend="${producto.stock < 5} ? 'bajo'"></span></li>
-        </ul>
+        <div class="detail-grid">
+            <div class="detail-item">
+                <span class="label">Categoría</span>
+                <span class="value" th:text="${producto.categoria}">—</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Precio</span>
+                <span class="value"
+                      th:text="${'$' + #numbers.formatDecimal(producto.precio, 1, 'POINT', 0, 'COMMA')}">$0</span>
+            </div>
+            <div class="detail-item">
+                <span class="label">Stock</span>
+                <span class="value"
+                      th:classappend="${producto.stock &lt; 5} ? ' bajo'"
+                      th:text="${producto.stock}">0</span>
+            </div>
+        </div>
 
         <p th:if="${producto.stock == 0}" class="alert alert-error">Producto agotado</p>
 
