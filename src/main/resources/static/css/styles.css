@@ -125,7 +125,9 @@ a:hover {
     font-weight: 600;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea,
+.form-group select {
     width: 100%;
     border: 1px solid var(--line);
     border-radius: 10px;
@@ -143,6 +145,95 @@ a:hover {
 .alert-error {
     background: var(--danger-soft);
     color: var(--danger);
+}
+
+.alert-success {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.page-wide {
+    width: min(1100px, calc(100% - 2rem));
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0 1.25rem;
+}
+
+.search-form input {
+    flex: 1 1 220px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    font: inherit;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 0.6rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.data-table th {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.bajo {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.actions-cell {
+    white-space: nowrap;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.link-button {
+    border: none;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+}
+
+.link-button.danger {
+    color: var(--danger);
+}
+
+.detail-list {
+    margin: 1rem 0;
+    padding-left: 1.1rem;
+    color: var(--muted);
+    line-height: 1.7;
 }
 
 .badge {

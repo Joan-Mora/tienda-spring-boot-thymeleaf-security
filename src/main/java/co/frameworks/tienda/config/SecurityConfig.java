@@ -17,6 +17,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/login", "/acceso-denegado", "/css/**").permitAll()
+                        .requestMatchers(
+                                "/productos/nuevo",
+                                "/productos/guardar",
+                                "/productos/*/editar",
+                                "/productos/*/eliminar"
+                        ).hasAnyRole("VENDEDOR", "ADMIN")
+                        .requestMatchers("/productos/**").hasAnyRole("CLIENTE", "VENDEDOR", "ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/vendedor/**").hasAnyRole("VENDEDOR", "ADMIN")
                         .requestMatchers("/cliente/**").hasAnyRole("CLIENTE", "ADMIN")

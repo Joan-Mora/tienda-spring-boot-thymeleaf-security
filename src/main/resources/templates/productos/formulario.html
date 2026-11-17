@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Formulario de producto')}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<main class="page">
+    <section class="card">
+        <h1 th:text="${producto.id == null} ? 'Nuevo producto' : 'Editar producto'">Producto</h1>
+        <p>Completa los campos y guarda. El id oculto distingue creación de edición.</p>
+
+        <form th:action="@{/productos/guardar}" th:object="${producto}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" type="text" th:field="*{nombre}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" th:field="*{descripcion}" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input id="precio" type="number" step="0.01" th:field="*{precio}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input id="stock" type="number" th:field="*{stock}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoría</label>
+                <select id="categoria" th:field="*{categoria}">
+                    <option th:each="c : ${categorias}" th:value="${c}" th:text="${c}"></option>
+                </select>
+            </div>
+
+            <div class="actions">
+                <button class="btn" type="submit">Guardar</button>
+                <a class="btn btn-secondary" th:href="@{/productos}">Cancelar</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

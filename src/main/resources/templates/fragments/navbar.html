@@ -4,6 +4,7 @@
 <body>
 <nav th:fragment="navbar" class="navbar">
     <a th:href="@{/}">Inicio</a>
+    <a sec:authorize="isAuthenticated()" th:href="@{/productos}">Productos</a>
     <a sec:authorize="hasAnyRole('CLIENTE','ADMIN')" th:href="@{/cliente}">Cliente</a>
     <a sec:authorize="hasAnyRole('VENDEDOR','ADMIN')" th:href="@{/vendedor}">Vendedor</a>
     <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}">Admin</a>
